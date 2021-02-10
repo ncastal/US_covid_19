@@ -14,16 +14,21 @@ cur = con.cursor()
 
 cur.execute('SELECT * FROM covid_19_us_cases_by_date')
 rows = list(cur.fetchall())
+cur.execute('SELECT * FROM covid_19_us_cases')
+state_rows=list(cur.fetchall())
+states=[]
+
+for i in state_rows:
+    if not i[1] in states:
+        states.append(i[1]) 
+states.sort()
 
 app=Flask(__name__)
-
-for i in rows:
-    print(i[0])
 
 #home page
 @app.route("/")
 def home():
-    return render_template('index.html',us_covid_19=rows) 
+    return render_template('index.html',us_covid_19=rows,states=states,states_covid=state_rows) 
 
 if __name__ == "__main__":
      app.run(debug=True)

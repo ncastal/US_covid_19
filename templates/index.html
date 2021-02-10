@@ -18,46 +18,20 @@
        <div id="plot1"></div>
        <div id="plot2"></div>
        <script>
-         var us_covid_19_array= {{us_covid_19|tojson}};
-         var date =[]
-         var total_cases=[]
-         var total_death=[]
-         us_covid_19_array.forEach(element => {
-          date.push(element[0])
-          total_cases.push(element[1])
-          total_death.push(element[6])
-        });
-         var trace1= {
-           x: date,
-           y: total_cases,
-           type: 'line'
-         }
-
-         var trace2={
-           x:date,
-           y:total_death,
-           type:'line'
-         }
-
-         var data=[trace1];
-
-         var layout ={
-           title: "Total US Covid 19 Cases by Date"
-         }
-
-         Plotly.newPlot("plot1",data,layout)
-
-         data=[trace2];
-
-         layout={
-           title:"Total US Covid 19 Deaths by Date"
-         }
-
-         Plotly.newPlot("plot2",data,layout)
+        var us_covid_19_array=  {{us_covid_19|tojson}};
+        var states=  {{states|tojson}};
+        var states_covid_array = {{states_covid|tojson}};
        </script>
+       <script src="static\js\chart.js"></script>
+       <select class="form-control" id="state" onchange="myFunction()">
+         <option value="">--Select State--</option>
+       </select>
+       <div id="plot3"></div>
+       <div id="plot4"></div>
       </ul>
     </div>
   </div>
 </body>
 
+<script src="static\js\state.js"></script>
 </html>
